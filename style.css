@@ -1,12 +1,23 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.navigation{
+.navigation {
   position: fixed;
+  display: flex;
+  justify-content: center;
   width: 100%;
   background: black;
-  height: 8vh;
+  height: 4rem;
 }
+
+.navigation-logo {
+  font-size: 2rem;
+  color: white;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Kaushan Script', cursive;
+}
+

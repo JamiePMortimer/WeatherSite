@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+a{
+  color: white;
+}
+
 /* Navigation Section */
 
 .navigation {
@@ -14,6 +18,14 @@
   width: 100%;
   background: black;
   height: 4rem;
+}
+
+.navigation-icon{
+  position: absolute;
+  left: 1.5rem;
+  display: flex;
+  color: white;
+  font-size: 2rem;
 }
 
 .navigation-logo {
@@ -27,7 +39,7 @@
 .navigation-burger{
   z-index: 2;
   position: absolute;
-  right: 1rem;
+  right: 1.5rem;
   width: 20px;
   height: 20px;
   margin: 0;

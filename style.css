@@ -4,10 +4,13 @@
   padding: 0;
 }
 
+/* Navigation Section */
+
 .navigation {
   position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   background: black;
   height: 4rem;
@@ -21,3 +24,28 @@
   font-family: 'Kaushan Script', cursive;
 }
 
+.navigation-burger{
+  z-index: 2;
+  position: absolute;
+  right: 1rem;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.navigation-burger__line{
+  display: flex;
+  border-bottom: 3px solid white;
+  margin-bottom: 5px;
+  width: 100%;
+  align-content: flex-end;
+}
+
+/* .navigation-burger__line:nth-child(2){
+  border-bottom: 3px solid white;
+  margin-bottom: 5px;
+  width: 80%;
+  flex-direction: row-reverse;
+} */

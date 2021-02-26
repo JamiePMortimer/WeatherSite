@@ -12,6 +12,7 @@ a {
 
 .navigation {
   position: fixed;
+  vertical-align: middle;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +23,7 @@ a {
 
 .navigation-icon {
   position: absolute;
+  margin-top: 10px;
   left: 1.5rem;
   display: flex;
   color: white;
@@ -39,10 +41,11 @@ a {
 .navigation-burger {
   z-index: 2;
   position: absolute;
+  
   right: 1.5rem;
   width: 35px;
   height: 30px;
-  margin: 0;
+  margin-top: 10px;
   padding: 0;
   cursor: pointer;
 }
@@ -76,6 +79,7 @@ a {
 
 .navigation-burger .navigation-burger__line:nth-last-child(1)
 {
+  margin-bottom: 0;
   transform-origin: 0% 100%;
 }
 

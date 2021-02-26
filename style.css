@@ -12,6 +12,7 @@ a {
 
 .navigation {
   position: fixed;
+  top: 0;
   vertical-align: middle;
   display: flex;
   justify-content: center;
@@ -98,9 +99,19 @@ a {
   transform: rotate(-45deg) translate(0, -1px);
 }
 
-/* .navigation-burger__line:nth-child(2){
-  border-bottom: 3px solid white;
-  margin-bottom: 5px;
-  width: 80%;
-  flex-direction: row-reverse;
-} */
+/* Input Section */
+
+.input{
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+  color: aqua;
+  margin: 5rem;
+}
+
+.input__search-box{
+  height: 3rem;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px 0 15px 0;
+}

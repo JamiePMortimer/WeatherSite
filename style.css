@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -115,9 +116,9 @@ video {
 .input {
   display: flex;
   justify-content: center;
-  padding-top: 4rem;
+  padding-top: 2rem;
   color: aqua;
-  margin: 5rem;
+  margin: 5rem 4rem 2rem 4rem;
 }
 
 .input__search-box {
@@ -136,4 +137,52 @@ video {
 
 .input__search-box:focus {
   background: rgba(255, 255, 255, 0.8);
+}
+
+/* Output Section */
+
+.output, .current-weather {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  padding: 1.5rem, 1.5rem, 3rem;
+  align-items: center;
+  text-align: center;
+}
+
+.output-location__city {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0rem;
+}
+.output-location__date{
+  color: #fff;
+  font-size: 2rem;
+}
+.current-weather .temp{
+color: #fff;
+font-size: 6.5rem;
+font-weight: bold;
+text-shadow: 2px 8px 5px rgba(0,0,0, 0.5);
+}
+
+.current-weather span {
+  font-weight: 500;
+  font-size: 5rem;
+}
+
+.current-weather .weather{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+.current-weather .hi-lo{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-shadow: 0px 2px rgba(0, 0, 0, 0.5);
 }

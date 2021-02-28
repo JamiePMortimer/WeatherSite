@@ -22,10 +22,29 @@ fetch(`${API.base}weather?q=${query}&units=metric&appid=${API.key}`)
 function displayResults(weather){
   console.log(weather);
   document.querySelector('.output-location__city').textContent = `${weather.name}, ${weather.sys.country}`
-  const tempNow = Math.round(+weather.main.temp)
+  const tempNow = Math.round(weather.main.temp)
   const tempmaxNow = Math.round(+weather.main.temp_max)
   const tempminNow = Math.round(+weather.main.temp_min)
-  document.querySelector('.temp').textContent = `${tempNow}°C`
-  document.querySelector('.hi-lo').textContent = `${tempmaxNow}°C / ${tempminNow}°C`
+  // ${tempNow}
+  document.querySelector('.temp').textContent = `<span>°C</span>`
+  document.querySelector('.hi-lo').textContent = `${tempminNow}°C / ${tempmaxNow}°C`
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`
 }
+
+let dateNow = function (){
+  let now = new Date();
+  let date = document.querySelector('.output-location__date')
+  date.innerText = datebuilder(now);
+}
+
+function datebuilder(d){
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+const days = ["Sun","Mon","Tues","Wed","thurs","Fri","Sat"];
+let day = days[d.getDay()];
+let date = d.getDate();
+let month = months[d.getMonth()];
+let year = d.getFullYear();
+return `${day} ${date} ${month}, ${year} `
+}
+
+dateNow();

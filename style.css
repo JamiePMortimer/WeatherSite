@@ -76,39 +76,16 @@ video {
   z-index: 2;
 }
 
-.navigation-burger__line {
+.line1,
+.line2,
+.line3 {
   display: flex;
   border-bottom: 4px solid white;
   margin-bottom: 6px;
   position: relative;
   border-radius: 5px;
   width: 100%;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-    opacity 0.55s ease;
-}
-
-.navigation-burger .navigation-burger__line:first-child {
-  transform-origin: 0% 0%;
-}
-
-.navigation-burger .navigation-burger__line:nth-last-child(1) {
-  margin-bottom: 0;
-  transform-origin: 0% 100%;
-}
-
-.navigation-burger input:checked ~ .navigation-burger__line {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-}
-
-.navigation-burger input:checked ~ .navigation-burger__line:nth-last-child(2) {
-  transform: rotate(0deg) scale(0.2, 0.2);
-  opacity: 0;
-}
-
-.navigation-burger input:checked ~ .navigation-burger__line:nth-last-child(1) {
-  transform: rotate(-45deg) translate(0, -1px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* Input Section */
@@ -141,7 +118,8 @@ video {
 
 /* Output Section */
 
-.output, .current-weather {
+.output,
+.current-weather {
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
@@ -156,15 +134,15 @@ video {
   font-weight: bold;
   margin-bottom: 0rem;
 }
-.output-location__date{
+.output-location__date {
   color: #fff;
   font-size: 2rem;
 }
-.current-weather .temp{
-color: #fff;
-font-size: 6.5rem;
-font-weight: bold;
-text-shadow: 2px 8px 5px rgba(0,0,0, 0.5);
+.current-weather .temp {
+  color: #fff;
+  font-size: 6.5rem;
+  font-weight: bold;
+  text-shadow: 2px 8px 5px rgba(0, 0, 0, 0.5);
 }
 
 .current-weather span {
@@ -172,7 +150,7 @@ text-shadow: 2px 8px 5px rgba(0,0,0, 0.5);
   font-size: 5rem;
 }
 
-.current-weather .weather{
+.current-weather .weather {
   color: #fff;
   font-size: 2rem;
   font-weight: 700;
@@ -180,9 +158,19 @@ text-shadow: 2px 8px 5px rgba(0,0,0, 0.5);
   text-shadow: 0px 2px rgba(0, 0, 0, 0.5);
 }
 
-.current-weather .hi-lo{
+.current-weather .hi-lo {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   text-shadow: 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+.toggle .line1 {
+  transform: rotate(45deg) translate(5px, 10px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: translate(-4px, -10px) rotate(-45deg);
 }

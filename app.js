@@ -46,3 +46,9 @@ return `${day} ${date} ${month}, ${year} `
 }
 
 dateNow();
+
+
+const burger = document.querySelector('.navigation-burger');
+burger.addEventListener('click', () =>{
+burger.classList.toggle('toggle')
+})

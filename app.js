@@ -20,13 +20,11 @@ fetch(`${API.base}weather?q=${query}&units=metric&appid=${API.key}`)
 }
 
 function displayResults(weather){
-  console.log(weather);
   document.querySelector('.output-location__city').textContent = `${weather.name}, ${weather.sys.country}`
   const tempNow = Math.round(weather.main.temp)
   const tempmaxNow = Math.round(+weather.main.temp_max)
   const tempminNow = Math.round(+weather.main.temp_min)
-  // ${tempNow}
-  document.querySelector('.temp').textContent = `<span>°C</span>`
+  document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`
   document.querySelector('.hi-lo').textContent = `${tempminNow}°C / ${tempmaxNow}°C`
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`
 }

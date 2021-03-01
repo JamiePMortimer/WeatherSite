@@ -26,13 +26,13 @@ video {
 .navigation {
   position: fixed;
   top: 0;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   background: black;
-  height: 4rem;
+  min-height: 8vh;  
 }
 
 .navigation-icon {
@@ -47,9 +47,13 @@ video {
 .navigation-logo {
   font-size: 2rem;
   color: white;
-  flex-direction: row;
+  display: flex;
   justify-content: center;
   font-family: 'Kaushan Script', cursive;
+}
+
+.navigation-links{
+  display: none;
 }
 
 .navigation-burger {
@@ -85,7 +89,45 @@ video {
   position: relative;
   border-radius: 5px;
   width: 100%;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+@media (min-width: 40rem){
+.navigation{
+  justify-content: space-around;
+}
+/* .navigation-logo{
+  width: 40%;
+  background: hotpink;
+} */
+  .navigation-burger{
+    display: none;
+  }
+
+.navigation-links{
+  /* display: flex;
+  color: #fff;
+  width: 40%;
+  background: gold;
+  justify-content: space-around; */
+
+  /* list-style-type: none;
+  flex-direction: row; */
+  
+  display: flex;
+  justify-content: space-around;
+  background: gold;
+  width: 40%;
+}
+
+.navigation-links__list{
+}
+
+.navigation-link{
+  display: flex;
+  justify-content: space-around;
+}
+
 }
 
 /* Input Section */
@@ -174,3 +216,4 @@ video {
 .toggle .line3 {
   transform: translate(-4px, -10px) rotate(-45deg);
 }
+

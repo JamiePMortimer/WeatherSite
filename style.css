@@ -5,6 +5,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+body{
+  background: #ccc;
+}
+
 a {
   color: white;
 }
@@ -96,31 +100,19 @@ video {
 .navigation{
   justify-content: space-around;
 }
-/* .navigation-logo{
-  width: 40%;
+.navigation-logo{
+  width: 65%;
   background: hotpink;
-} */
+}
   .navigation-burger{
     display: none;
   }
 
 .navigation-links{
-  /* display: flex;
-  color: #fff;
-  width: 40%;
-  background: gold;
-  justify-content: space-around; */
-
-  /* list-style-type: none;
-  flex-direction: row; */
-  
   display: flex;
   justify-content: space-around;
   background: gold;
-  width: 40%;
-}
-
-.navigation-links__list{
+  width: 35%;
 }
 
 .navigation-link{

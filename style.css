@@ -32,7 +32,9 @@ video {
   top: 0;
   /* vertical-align: middle; */
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   background: black;
@@ -40,9 +42,8 @@ video {
 }
 
 .navigation-icon {
-  position: absolute;
   margin-top: 10px;
-  left: 1.5rem;
+  margin-left: 2.5rem;
   display: flex;
   color: white;
   font-size: 2rem;
@@ -56,18 +57,10 @@ video {
   font-family: 'Kaushan Script', cursive;
 }
 
-.navigation-links{
-  display: none;
-}
-
 .navigation-burger {
-  z-index: 2;
-  position: absolute;
-
-  right: 1.5rem;
+  margin-right: 2rem;
   width: 35px;
   height: 30px;
-  margin-top: 10px;
   padding: 0;
   cursor: pointer;
 }
@@ -84,6 +77,12 @@ video {
   z-index: 2;
 }
 
+.links-burger{
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
 .line1,
 .line2,
 .line3 {
@@ -94,32 +93,6 @@ video {
   border-radius: 5px;
   width: 100%;
   transition: transform 0.5s ease, opacity 0.3s ease;
-}
-
-@media (min-width: 40rem){
-.navigation{
-  justify-content: space-around;
-}
-.navigation-logo{
-  width: 65%;
-  background: hotpink;
-}
-  .navigation-burger{
-    display: none;
-  }
-
-.navigation-links{
-  display: flex;
-  justify-content: space-around;
-  background: gold;
-  width: 35%;
-}
-
-.navigation-link{
-  display: flex;
-  justify-content: space-around;
-}
-
 }
 
 /* Input Section */

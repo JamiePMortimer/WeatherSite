@@ -67,7 +67,11 @@ dateNow();
 
 const burger = document.querySelector('.navigation-burger');
 const menu = document.querySelector('.side-menu');
+const menuLinks = document.querySelectorAll('.menu-links li');
 burger.addEventListener('click', () => {
   burger.classList.toggle('toggle');
   menu.classList.toggle('side-menu-active');
+  menuLinks.forEach((e) => {
+    e.classList.toggle('hide');
+  });
 });

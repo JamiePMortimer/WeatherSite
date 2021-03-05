@@ -66,12 +66,8 @@ function datebuilder(d) {
 dateNow();
 
 const burger = document.querySelector('.navigation-burger');
-const menu = document.querySelector('menu');
+const menu = document.querySelector('.side-menu');
 burger.addEventListener('click', () => {
   burger.classList.toggle('toggle');
-  if (menu.className === 'open') {
-    menu.className = 'closed';
-  } else {
-    menu.className = 'open';
-  }
+  menu.classList.toggle('side-menu-active');
 });

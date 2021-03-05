@@ -7,6 +7,7 @@
 
 body {
   background: #ccc;
+  overflow-x: hidden;
 }
 
 a {
@@ -35,7 +36,7 @@ video {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   background: black;
@@ -103,24 +104,40 @@ video {
 
 /* Menu Section */
 
-menu{
-position: absolute;
-right: 0;
-top: 0;
-z-index: -1;
-transition: width 0.5s ease;
+.side-menu {
+  position: absolute;
+  right: 0;
+  height: 90vh;
+  bottom: 0;
+  background: black;
+  color: rgb(224, 224, 224);
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in;
 }
 
-.open{
-  width: 15rem;
-  height: 100%;
-  background: black;
+.side-menu-active {
+  transform: translateX(0%);
 }
 
-.closed{
-  width: 0rem;
-  height: 100%;
+.menu-links {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
   background: black;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 30%;
+}
+
+.menu-links li {
+  transition: display 0.5s ease;
+  list-style-type: none;
 }
 
 /* Input Section */
@@ -208,4 +225,8 @@ transition: width 0.5s ease;
 }
 .toggle .line3 {
   transform: translate(-4px, -10px) rotate(-45deg);
+}
+
+.hide {
+  display: none;
 }

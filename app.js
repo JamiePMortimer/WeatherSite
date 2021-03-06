@@ -12,6 +12,8 @@ function weatherQuery(e) {
   }
 }
 
+// Current Weather API Request
+
 function getResults(query) {
   fetch(`${API.base}weather?q=${query}&units=metric&appid=${API.key}`)
     .then((weather) => {
@@ -33,6 +35,28 @@ function displayResults(weather) {
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
 }
+
+// Current Location Weather
+
+const marker = document.querySelector('.here i');
+marker.addEventListener('click', () => {
+  console.log('It works');
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+});
+
+function geoSuccess(pos) {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+  fetch(
+    `${API.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API.key}`
+  )
+    .then((weather) => {
+      console.log( weather.json());
+    })
+    // .then(console.log(we));
+}
+
+// Date Functions
 
 let dateNow = function () {
   let now = new Date();
@@ -65,6 +89,8 @@ function datebuilder(d) {
 
 dateNow();
 
+// Burger Animation
+
 const burger = document.querySelector('.navigation-burger');
 const menu = document.querySelector('.side-menu');
 const menuLinks = document.querySelectorAll('.menu-links li');
@@ -75,3 +101,12 @@ burger.addEventListener('click', () => {
     e.classList.toggle('hide');
   });
 });
+
+/* 
+Click the button
+Requests current location - Lat Lng
+Convert Lat Lng to location
+Input location into Weather request
+Pull back weather output
+
+*/

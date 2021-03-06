@@ -116,7 +116,7 @@ video {
   flex-direction: column;
   width: 20%;
   transform: translateX(100%);
-  transition: transform 0.5s ease-in;
+  transition: transform 0.5s ease-in-out;
 }
 
 .side-menu-active {
@@ -134,17 +134,31 @@ video {
   margin: 0;
   padding: 0;
   height: 100%;
-
 }
 
 .menu-links li {
-  transition: display 0.5s ease;
+  transition: opacity 0.9s ease-in-out;
   list-style-type: none;
+}
+
+.menu-links li a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-links li a:hover,
+.menu-links li a:active {
+  font-weight: bold;
+}
+
+.active-link {
+  font-weight: bold;
 }
 
 /* Input Section */
 
 .input {
+  position: relative;
   display: flex;
   justify-content: center;
   padding-top: 2rem;
@@ -169,6 +183,23 @@ video {
 .input__search-box:focus {
   background: rgba(255, 255, 255, 0.8);
 }
+
+.here {
+  display: flex;
+  align-items: center;
+}
+.here i {
+  padding-left: 2rem;
+  font-size: 2.5rem;
+  color: black;
+  cursor: pointer;
+}
+
+.here i:active,
+.here i:hover{
+  color: rgb(66, 66, 66);
+}
+
 
 /* Output Section */
 

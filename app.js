@@ -40,21 +40,16 @@ function displayResults(weather) {
 
 const marker = document.querySelector('.here i');
 marker.addEventListener('click', () => {
-  console.log('It works');
   navigator.geolocation.getCurrentPosition(geoSuccess);
 });
 
 function geoSuccess(pos) {
   const lat = pos.coords.latitude;
   const lon = pos.coords.longitude;
-  fetch(
-    `${API.base}onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${API.key}`
-  )
-    .then((weather) => {
-      console.log( weather.json());
-    })
-    // .then(console.log(we));
-}
+ findLocation(lat, lon)
+  };
+  // .then(console.log(we));
+
 
 // Date Functions
 

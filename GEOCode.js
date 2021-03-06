@@ -5,8 +5,8 @@ const API2 = {
 let lat;
 let lng;
 
-function geoResults(location) {
-  fetch(`${API2.base}${location}&key=${API2.key}`)
+function findCoords(location) {
+  fetch(`${API2.base}${location}&key=${API2.key}&no_annotations=1`)
     .then((location) => {
       return location.json();
     })
@@ -16,8 +16,22 @@ function geoResults(location) {
 function displayResult(location) {
   lat = location.results[0].geometry.lat;
   lng = location.results[0].geometry.lng;
-  console.log(lat, lng);
 }
 
-// geoResults('London, UK');
+function findLocation(lat, lon) {
+  fetch(`${API2.base}${lat}+${lon}&key=${API2.key}&pretty=1&no_annotations=1`)
+    .then((location) => {
+      return location.json();
+    })
+    .then(resLoc);
+}
 
+function resLoc(location) {
+  const ctry = location.results[0].components.country_code.toUpperCase();
+  if (!location.results[0].components.city) {
+    getResults(`${location.results[0].components.town}, ${ctry}`);
+  } else {
+    getResults(`${location.results[0].components.city}, ${ctry}`);
+  }
+  console.log(location);
+}

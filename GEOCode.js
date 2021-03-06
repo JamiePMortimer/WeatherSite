@@ -30,8 +30,12 @@ function resLoc(location) {
   const ctry = location.results[0].components.country_code.toUpperCase();
   if (!location.results[0].components.city) {
     getResults(`${location.results[0].components.town}, ${ctry}`);
+    document.cookie = `WON_place=${location.results[0].components.town}`;
+    document.cookie = `WON_country=${ctry}`;
   } else {
     getResults(`${location.results[0].components.city}, ${ctry}`);
+    document.cookie = `WON_place=${location.results[0].components.city}`;
+    document.cookie = `WON_country=${ctry}`;
   }
   console.log(location);
 }

@@ -1,3 +1,4 @@
+
 const API = {
   key: '3c6b6453b9930344c0199f22529f0a0e',
   base: 'https://api.openweathermap.org/data/2.5/',
@@ -46,10 +47,9 @@ marker.addEventListener('click', () => {
 function geoSuccess(pos) {
   const lat = pos.coords.latitude;
   const lon = pos.coords.longitude;
- findLocation(lat, lon)
-  };
-  // .then(console.log(we));
-
+  findLocation(lat, lon);
+}
+// .then(console.log(we));
 
 // Date Functions
 

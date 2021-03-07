@@ -2,6 +2,9 @@ const API = {
   key: '3c6b6453b9930344c0199f22529f0a0e',
   base: 'https://api.openweathermap.org/data/2.5/',
 };
+
+let activeMenu;
+
 const city = document.querySelector('.output-location__city');
 const searchInput = document.querySelector('.input__search-box');
 searchInput.addEventListener('keypress', weatherQuery);
@@ -115,5 +118,6 @@ menuLinks.forEach((link) => {
       }
     });
     e.target.classList.add('current-link');
+    activeMenu = e.target.id;
   });
 });

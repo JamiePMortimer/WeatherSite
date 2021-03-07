@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #ccc;
+  /* background: #ccc; */
   overflow-x: hidden;
 }
 
@@ -143,7 +143,7 @@ video {
   cursor: pointer;
 }
 
-.menu-links li:hover{
+.menu-links li:hover:not(.current-link){
   text-shadow: 1px 1px 15px orange;
 
 }
@@ -153,11 +153,6 @@ video {
   font-weight: bold;
   cursor: default !important;
 }
-
-/* .active-link {
-  font-weight: bold;
-  color: white !important;
-} */
 
 /* Input Section */
 
@@ -195,13 +190,13 @@ video {
 .here i {
   padding-left: 2rem;
   font-size: 2.5rem;
-  color: black;
+  color: gold;
   cursor: pointer;
 }
 
 .here i:active,
 .here i:hover{
-  color: rgb(66, 66, 66);
+  color: goldenrod;
 }
 
 

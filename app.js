@@ -49,7 +49,6 @@ function geoSuccess(pos) {
   const lon = pos.coords.longitude;
   findLocation(lat, lon);
 }
-// .then(console.log(we));
 
 // Date Functions
 
@@ -105,3 +104,7 @@ Input location into Weather request
 Pull back weather output
 
 */
+
+if(document.cookie.split('; ').find((row) => row.startsWith('WON_place=')).split('=')[1]){
+  getResults(document.cookie.split('; ').find((row) => row.startsWith('WON_place=')).split('=')[1])
+}

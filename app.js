@@ -1,4 +1,3 @@
-
 const API = {
   key: '3c6b6453b9930344c0199f22529f0a0e',
   base: 'https://api.openweathermap.org/data/2.5/',
@@ -105,6 +104,11 @@ Pull back weather output
 
 */
 
-if(document.cookie.split('; ').find((row) => row.startsWith('WON_place=')).split('=')[1]){
-  getResults(document.cookie.split('; ').find((row) => row.startsWith('WON_place=')).split('=')[1])
+if (document.cookie.split('; ').length > 1) {
+  getResults(
+    document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('WON_place='))
+      .split('=')[1]
+  );
 }

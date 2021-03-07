@@ -95,15 +95,6 @@ burger.addEventListener('click', () => {
   });
 });
 
-/* 
-Click the button
-Requests current location - Lat Lng
-Convert Lat Lng to location
-Input location into Weather request
-Pull back weather output
-
-*/
-
 if (document.cookie.split('; ').length > 1) {
   getResults(
     document.cookie
@@ -112,3 +103,17 @@ if (document.cookie.split('; ').length > 1) {
       .split('=')[1]
   );
 }
+
+//Menu Selection
+
+menuLinks.forEach((link) => {
+  link.addEventListener('click', (e) => {
+    menuLinks.forEach((links) => {
+      if (links.target === e.target) {
+      } else {
+        links.classList.remove('current-link');
+      }
+    });
+    e.target.classList.add('current-link');
+  });
+});

@@ -140,6 +140,7 @@ video {
 .menu-links li {
   transition: opacity 0.9s ease-in-out;
   list-style-type: none;
+  cursor: pointer;
 }
 
 .menu-links li:hover{
@@ -147,19 +148,16 @@ video {
 
 }
 
-.menu-links li a {
-  text-decoration: none;
-  color: rgb(201, 201, 201);
+.current-link{
+  color: white;
+  font-weight: bold;
+  cursor: default !important;
 }
 
-.menu-links li a:hover,
-.menu-links li a:active {
-}
-
-.active-link {
+/* .active-link {
   font-weight: bold;
   color: white !important;
-}
+} */
 
 /* Input Section */
 

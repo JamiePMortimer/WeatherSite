@@ -37,5 +37,4 @@ function resLoc(location) {
     document.cookie = `WON_place=${location.results[0].components.city}`;
     document.cookie = `WON_country=${ctry}`;
   }
-  console.log(location);
 }

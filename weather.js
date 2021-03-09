@@ -21,15 +21,17 @@ function weatherQuery(e) {
 
 function getWeather(location, lat, lon) {
   if (activeMenu === 'current') {
-    fetch(
-      `${APIs.base}weather?q=${location}&units=metric&appid=${APIs.key}`
-    ).then((weather) => {
-      return weather.json();
-    })
-    .then(displayResults);
+    fetch(`${APIs.base}weather?q=${location}&units=metric&appid=${APIs.key}`)
+      .then((weather) => {
+        return weather.json();
+      })
+      .then(displayResults);
   } else {
     fetch(
-      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${exclude-the-ones-I-dont-want}appid=${APIs.key}`)
+      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${
+        exclude - the - ones - I - dont - want
+      }appid=${APIs.key}`
+    );
   }
 }
 
@@ -39,9 +41,9 @@ marker.addEventListener('click', () => {
 });
 
 function geoSuccess(pos) {
-  const lat = pos.coords.latitude;
-  const lon = pos.coords.longitude;
-  fetch(`${API2.base}${lat}+${lon}&key=${API2.key}&pretty=1&no_annotations=1`)
+  lat = pos.coords.latitude;
+  lon = pos.coords.longitude;
+  fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
     .then((location) => {
       return location.json();
     })
@@ -51,11 +53,11 @@ function geoSuccess(pos) {
 function resLoc(location) {
   const ctry = location.results[0].components.country_code.toUpperCase();
   if (!location.results[0].components.city) {
-    getResults(`${location.results[0].components.town}, ${ctry}`);
+    getWeather(`${location.results[0].components.town}, ${ctry}`);
     document.cookie = `WON_place=${location.results[0].components.town}`;
     document.cookie = `WON_country=${ctry}`;
   } else {
-    getResults(`${location.results[0].components.city}, ${ctry}`);
+    getWeather(`${location.results[0].components.city}, ${ctry}`);
     document.cookie = `WON_place=${location.results[0].components.city}`;
     document.cookie = `WON_country=${ctry}`;
   }
@@ -77,31 +79,26 @@ function displayResult(weather) {
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
 }
 
-
-
-
-
 // SPARE GEOCODE CODE SNIPPETS
 
+// const API2 = {
+//   key: '69adfaa55e574e9bb954810d342d6fe7',
+//   base: 'https://api.opencagedata.com/geocode/v1/json?q=',
+// };
+// let lat;
+// let lng;
 
-const API2 = {
-  key: '69adfaa55e574e9bb954810d342d6fe7',
-  base: 'https://api.opencagedata.com/geocode/v1/json?q=',
-};
-let lat;
-let lng;
+// function findCoords(location) {
+//   fetch(`${API2.base}${location}&key=${API2.key}&no_annotations=1`)
+//     .then((location) => {
+//       return location.json();
+//     })
+//     .then(displayResult);
+// }
 
-function findCoords(location) {
-  fetch(`${API2.base}${location}&key=${API2.key}&no_annotations=1`)
-    .then((location) => {
-      return location.json();
-    })
-    .then(displayResult);
-}
-
-function displayResult(location) {
-  lat = location.results[0].geometry.lat;
-  lng = location.results[0].geometry.lng;
-}
+// function displayResult(location) {
+//   lat = location.results[0].geometry.lat;
+//   lng = location.results[0].geometry.lng;
+// }
 
 // END OF GEOCODE CODE SNIPPETS

@@ -25,14 +25,29 @@ function getWeather(location, lat, lon) {
       .then((weather) => {
         return weather.json();
       })
-      .then(displayResults);
+      .then(displayResult);
   } else {
     fetch(
-      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${
-        exclude - the - ones - I - dont - want
-      }appid=${APIs.key}`
-    );
+      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
+    )
+      .then((weather) => {
+        return weather.json();
+      })
+      .then(dothisthing);
   }
+}
+
+function dothisthing(weather) {
+  console.log(weather);
+  let weatherDeets = {
+    locationCity: '',
+    locationCountry: '',
+    temp: '',
+    weatherDesc: '',
+    tempMin: Math.round(weather.daily[1].temp.min),
+    tempMax: Math.round(weather.daily[1].temp.max),
+  };
+  console.log(weatherDeets.tempMax);
 }
 
 const marker = document.querySelector('.here i');
@@ -43,11 +58,15 @@ marker.addEventListener('click', () => {
 function geoSuccess(pos) {
   lat = pos.coords.latitude;
   lon = pos.coords.longitude;
-  fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
-    .then((location) => {
-      return location.json();
-    })
-    .then(resLoc);
+  if (activeMenu === 'current') {
+    fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
+      .then((location) => {
+        return location.json();
+      })
+      .then(resLoc);
+  } else {
+    getWeather('', lat, lon);
+  }
 }
 
 function resLoc(location) {

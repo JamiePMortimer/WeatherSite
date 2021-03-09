@@ -42,12 +42,16 @@ function dothisthing(weather) {
   let weatherDeets = {
     locationCity: '',
     locationCountry: '',
-    temp: '',
-    weatherDesc: '',
+    temp: Math.round(
+      (Math.round(weather.daily[1].temp.min) +
+        Math.round(weather.daily[1].temp.max)) /
+        2
+    ),
+    weatherDesc: weather.daily[1].weather.main,
     tempMin: Math.round(weather.daily[1].temp.min),
     tempMax: Math.round(weather.daily[1].temp.max),
   };
-  console.log(weatherDeets.tempMax);
+  console.log(weatherDeets.temp);
 }
 
 const marker = document.querySelector('.here i');

@@ -3,21 +3,20 @@ const API = {
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
-let activeMenu;
-
 const city = document.querySelector('.output-location__city');
 const searchInput = document.querySelector('.input__search-box');
 searchInput.addEventListener('keypress', weatherQuery);
 
-function weatherQuery(e) {
-  if (e.keyCode == 13) {
-    getResults(searchInput.value);
-  }
-}
+// function weatherQuery(e) {
+//   if (e.keyCode == 13) {
+//     getResults(searchInput.value);
+//   }
+// }
 
 // Current Weather API Request
 
 function getResults(query) {
+
   fetch(`${API.base}weather?q=${query}&units=metric&appid=${API.key}`)
     .then((weather) => {
       return weather.json();
@@ -41,16 +40,9 @@ function displayResults(weather) {
 
 // Current Location Weather
 
-const marker = document.querySelector('.here i');
-marker.addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(geoSuccess);
-});
 
-function geoSuccess(pos) {
-  const lat = pos.coords.latitude;
-  const lon = pos.coords.longitude;
-  findLocation(lat, lon);
-}
+
+
 
 // Date Functions
 

@@ -3,9 +3,8 @@ const API = {
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
-const city = document.querySelector('.output-location__city');
-const searchInput = document.querySelector('.input__search-box');
-searchInput.addEventListener('keypress', weatherQuery);
+
+
 
 // function weatherQuery(e) {
 //   if (e.keyCode == 13) {

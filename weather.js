@@ -1,3 +1,5 @@
+// API Key List
+
 const APIs = {
   key: '3c6b6453b9930344c0199f22529f0a0e',
   base: 'https://api.openweathermap.org/data/2.5/',
@@ -8,16 +10,27 @@ const Open = {
   base: 'https://api.opencagedata.com/geocode/v1/json?q=',
 };
 
+// Variables List
+
+const city = document.querySelector('.output-location__city');
+const searchInput = document.querySelector('.input__search-box');
+const marker = document.querySelector('.here i');
+
 let lat;
 let lng;
-
 let activeMenu = 'current';
+
+// Input functions
 
 function weatherQuery(e) {
   if (e.keyCode == 13) {
     getWeather(searchInput.value);
   }
 }
+
+searchInput.addEventListener('keypress', weatherQuery);
+
+// API Calls
 
 function getWeather(location, lat, lon) {
   if (activeMenu === 'current') {
@@ -37,6 +50,8 @@ function getWeather(location, lat, lon) {
   }
 }
 
+// Dom Amends
+
 function dothisthing(weather) {
   console.log(weather);
   let weatherDeets = {
@@ -54,12 +69,14 @@ function dothisthing(weather) {
   console.log(weatherDeets.temp);
 }
 
-const marker = document.querySelector('.here i');
+
 marker.addEventListener('click', () => {
   navigator.geolocation.getCurrentPosition(geoSuccess);
+  console.log('marker listener');
 });
 
 function geoSuccess(pos) {
+  console.log('GeoSuccess - Start')
   lat = pos.coords.latitude;
   lon = pos.coords.longitude;
   if (activeMenu === 'current') {

@@ -30,6 +30,29 @@ function weatherQuery(e) {
 
 searchInput.addEventListener('keypress', weatherQuery);
 
+// marker.addEventListener('click', () => {
+//   console.log('market event');
+//   navigator.geolocation.getCurrentPosition(geoSuc,geoFail);
+// });
+
+// function geoFail(error){
+//   console.log(error.message)
+// }
+
+// function geoSuc(pos) {
+//   console.log(pos)
+// }
+
+marker.addEventListener('click', () => {
+  console.log('It works');
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+});
+
+function geoSuccess(pos) {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+console.log(`lat:${lat} & lon${lon}`)
+}
 // API Calls
 
 function getWeather(location, lat, lon) {
@@ -69,11 +92,9 @@ function dothisthing(weather) {
   console.log(weatherDeets.temp);
 }
 
+//To Refactor
 
-marker.addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(geoSuccess);
-  console.log('marker listener');
-});
+
 
 function geoSuccess(pos) {
   console.log('GeoSuccess - Start')

@@ -1,14 +1,4 @@
-// API Key List
 
-const APIs = {
-  key: '3c6b6453b9930344c0199f22529f0a0e',
-  base: 'https://api.openweathermap.org/data/2.5/',
-};
-
-const Open = {
-  key: '69adfaa55e574e9bb954810d342d6fe7',
-  base: 'https://api.opencagedata.com/geocode/v1/json?q=',
-};
 
 // Variables List
 
@@ -16,8 +6,8 @@ const city = document.querySelector('.output-location__city');
 const searchInput = document.querySelector('.input__search-box');
 const marker = document.querySelector('.here i');
 
-let lat;
-let lng;
+let lat = '';
+let lng = '';
 let activeMenu = 'current';
 
 // Input functions
@@ -75,14 +65,13 @@ function getWeather(location, lat, lon) {
         return weather.json();
       })
       .then(displayResult);
-  } else if (activeMenu === 'tommorrow') {
-    fetch(
-      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
-    ).then((weather) => {
-      return weather.json();
-    })
-    .then(dothisthing);
   } else {
+    fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`).then(
+      (location) => {
+        return location.json().then(latLon);
+      }
+    );
+
     fetch(
       `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
     )
@@ -90,6 +79,11 @@ function getWeather(location, lat, lon) {
         return weather.json();
       })
       .then(dothisthing);
+  }
+  function latLon(location) {
+    lat = location.results[0].geometry.lat;
+    lon = location.results[0].geometry.lng;
+
   }
 }
 
@@ -107,26 +101,25 @@ function dothisthing(weather) {
     weatherDesc: weather.daily[1].weather[0].main,
     tempMin: Math.round(weather.daily[1].temp.min),
     tempMax: Math.round(weather.daily[1].temp.max),
-    weatherDate: datebuilder(new Date(weather.daily[1].dt * 1000))
+    weatherDate: datebuilder(new Date(weather.daily[1].dt * 1000)),
   };
-  document.querySelector(
-    '.output-location__city'
-  )
+  document.querySelector('.output-location__city');
   // .textContent = `${weather.name}, ${weather.sys.country}`;
-  const tempNow = weatherDeets.temp
-  const tempmaxNow = weatherDeets.tempMax
-  const tempminNow = weatherDeets.tempMin
+  const tempNow = weatherDeets.temp;
+  const tempmaxNow = weatherDeets.tempMax;
+  const tempminNow = weatherDeets.tempMin;
   document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`;
   document.querySelector(
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
-  document.querySelector('.weather').textContent = `${weatherDeets.weatherDesc}`;
-  document.querySelector('.output-location__date').innerText = weatherDeets.weatherDate
+  document.querySelector(
+    '.weather'
+  ).textContent = `${weatherDeets.weatherDesc}`;
+  document.querySelector('.output-location__date').innerText =
+    weatherDeets.weatherDate;
 }
 
 //To Refactor
-
-
 
 function resLoc(location) {
   const ctry = location.results[0].components.country_code.toUpperCase();

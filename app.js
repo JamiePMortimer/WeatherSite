@@ -1,16 +1,14 @@
+// API Key List
+
 const API = {
   key: '3c6b6453b9930344c0199f22529f0a0e',
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
-
-
-
-// function weatherQuery(e) {
-//   if (e.keyCode == 13) {
-//     getResults(searchInput.value);
-//   }
-// }
+const Open = {
+  key: '69adfaa55e574e9bb954810d342d6fe7',
+  base: 'https://api.opencagedata.com/geocode/v1/json?q=',
+};
 
 // Current Weather API Request
 
@@ -97,18 +95,3 @@ if (document.cookie.split('; ').length > 1) {
       .split('=')[1]
   );
 }
-
-//Menu Selection
-
-menuLinks.forEach((link) => {
-  link.addEventListener('click', (e) => {
-    menuLinks.forEach((links) => {
-      if (links.target === e.target) {
-      } else {
-        links.classList.remove('current-link');
-      }
-    });
-    e.target.classList.add('current-link');
-    activeMenu = e.target.id;
-  });
-});

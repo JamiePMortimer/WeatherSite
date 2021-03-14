@@ -76,7 +76,6 @@ function getWeather(location, lat, lon) {
       })
       .then(displayResult);
   } else if (activeMenu === 'tommorrow') {
-    console.log('Tomorrow')
     fetch(
       `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
     ).then((weather) => {
@@ -97,7 +96,6 @@ function getWeather(location, lat, lon) {
 // Dom Amends
 
 function dothisthing(weather) {
-  console.log(weather);
   let weatherDeets = {
     locationCity: '',
     locationCountry: '',
@@ -109,6 +107,7 @@ function dothisthing(weather) {
     weatherDesc: weather.daily[1].weather[0].main,
     tempMin: Math.round(weather.daily[1].temp.min),
     tempMax: Math.round(weather.daily[1].temp.max),
+    weatherDate: datebuilder(new Date(weather.daily[1].dt * 1000))
   };
   document.querySelector(
     '.output-location__city'
@@ -122,6 +121,7 @@ function dothisthing(weather) {
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
   document.querySelector('.weather').textContent = `${weatherDeets.weatherDesc}`;
+  document.querySelector('.output-location__date').innerText = weatherDeets.weatherDate
 }
 
 //To Refactor

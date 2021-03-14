@@ -44,15 +44,28 @@ searchInput.addEventListener('keypress', weatherQuery);
 // }
 
 marker.addEventListener('click', () => {
-  console.log('It works');
   navigator.geolocation.getCurrentPosition(geoSuccess);
 });
 
 function geoSuccess(pos) {
-  const lat = pos.coords.latitude;
-  const lon = pos.coords.longitude;
-console.log(`lat:${lat} & lon${lon}`)
+  lat = pos.coords.latitude;
+  lon = pos.coords.longitude;
+  if (activeMenu === 'current') {
+    fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
+      .then((location) => {
+        return location.json();
+      })
+      .then(resLoc);
+  } else {
+    getWeather('', lat, lon);
+  }
 }
+
+// function geoSuccess(pos) {
+//   const lat = pos.coords.latitude;
+//   const lon = pos.coords.longitude;
+//   console.log(`lat:${lat} & lon${lon}`);
+// }
 // API Calls
 
 function getWeather(location, lat, lon) {
@@ -62,6 +75,14 @@ function getWeather(location, lat, lon) {
         return weather.json();
       })
       .then(displayResult);
+  } else if (activeMenu === 'tommorrow') {
+    console.log('Tomorrow')
+    fetch(
+      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
+    ).then((weather) => {
+      return weather.json();
+    })
+    .then(dothisthing);
   } else {
     fetch(
       `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
@@ -85,31 +106,27 @@ function dothisthing(weather) {
         Math.round(weather.daily[1].temp.max)) /
         2
     ),
-    weatherDesc: weather.daily[1].weather.main,
+    weatherDesc: weather.daily[1].weather[0].main,
     tempMin: Math.round(weather.daily[1].temp.min),
     tempMax: Math.round(weather.daily[1].temp.max),
   };
-  console.log(weatherDeets.temp);
+  document.querySelector(
+    '.output-location__city'
+  )
+  // .textContent = `${weather.name}, ${weather.sys.country}`;
+  const tempNow = weatherDeets.temp
+  const tempmaxNow = weatherDeets.tempMax
+  const tempminNow = weatherDeets.tempMin
+  document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`;
+  document.querySelector(
+    '.hi-lo'
+  ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
+  document.querySelector('.weather').textContent = `${weatherDeets.weatherDesc}`;
 }
 
 //To Refactor
 
 
-
-function geoSuccess(pos) {
-  console.log('GeoSuccess - Start')
-  lat = pos.coords.latitude;
-  lon = pos.coords.longitude;
-  if (activeMenu === 'current') {
-    fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
-      .then((location) => {
-        return location.json();
-      })
-      .then(resLoc);
-  } else {
-    getWeather('', lat, lon);
-  }
-}
 
 function resLoc(location) {
   const ctry = location.results[0].components.country_code.toUpperCase();

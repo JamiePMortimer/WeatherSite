@@ -13,7 +13,6 @@ const Open = {
 // Current Weather API Request
 
 function getResults(query) {
-
   fetch(`${API.base}weather?q=${query}&units=metric&appid=${API.key}`)
     .then((weather) => {
       return weather.json();
@@ -36,10 +35,6 @@ function displayResults(weather) {
 }
 
 // Current Location Weather
-
-
-
-
 
 // Date Functions
 
@@ -97,22 +92,46 @@ if (document.cookie.split('; ').length > 1) {
 }
 // GeoCoding Functions
 
-function forwardGeo (location) {
+function forwardGeo(location) {
   fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
-  .then((response) => {
-return response.json()})
-.then( response => {
-  lat = response.results[0].geometry.lat;
-  lon = response.results[0].geometry.lng;
-})}
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      lat = response.results[0].geometry.lat;
+      lon = response.results[0].geometry.lng;
+    });
+}
 
 // 51.5073219, -0.1276474
 
-function reverseGeo (lat, lon) {
+function reverseGeo(lat, lon) {
   fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
-  .then((response) =>{
-    return response.json()})
-  .then( response => {
-    console.log(response);
-  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (!response.results[0].components.city) {
+        let geoCountry = response.results[0].components.country_code.toUpperCase();
+        let geoPlace = response.results[0].components.town;
+        return `${geoPlace}, ${geoCountry}`;
+      } else {
+        let geoCountry = response.results[0].components.country_code.toUpperCase();
+        let geoPlace = response.results[0].components.city;
+        return `${geoPlace}, ${geoCountry}`;
+      }
+    });
 }
+
+// function resLoc(location) {
+//   const ctry = location.results[0].components.country_code.toUpperCase();
+//   if (!location.results[0].components.city) {
+//     getWeather(`${location.results[0].components.town}, ${ctry}`);
+//     document.cookie = `WON_place=${location.results[0].components.town}`;
+//     document.cookie = `WON_country=${ctry}`;
+//   } else {
+//     getWeather(`${location.results[0].components.city}, ${ctry}`);
+//     document.cookie = `WON_place=${location.results[0].components.city}`;
+//     document.cookie = `WON_country=${ctry}`;
+//   }
+// }

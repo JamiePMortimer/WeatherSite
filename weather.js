@@ -60,26 +60,34 @@ function geoSuccess(pos) {
 
 function getWeather(location, lat, lon) {
   if (activeMenu === 'current') {
-    fetch(`${APIs.base}weather?q=${location}&units=metric&appid=${APIs.key}`)
+    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
       .then((weather) => {
         return weather.json();
       })
       .then(displayResult);
-  } else {
-    fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`).then(
-      (location) => {
-        return location.json().then(latLon);
-      }
-    );
+  } else {}
 
-    fetch(
-      `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
-    )
-      .then((weather) => {
-        return weather.json();
-      })
-      .then(dothisthing);
-  }
+
+
+
+
+    // fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)    
+    // .then((location) => {
+    //   return location.json();
+    // }).then(location => fetch())
+
+
+    // )
+
+  //   fetch(
+  //     `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
+  //   )
+  //     .then((weather) => {
+  //       return weather.json();
+  //     })
+  //     .then(dothisthing);
+  // }
+
   function latLon(location) {
     lat = location.results[0].geometry.lat;
     lon = location.results[0].geometry.lng;

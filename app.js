@@ -95,3 +95,24 @@ if (document.cookie.split('; ').length > 1) {
       .split('=')[1]
   );
 }
+// GeoCoding Functions
+
+function forwardGeo (location) {
+  fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
+  .then((response) => {
+return response.json()})
+.then( response => {
+  lat = response.results[0].geometry.lat;
+  lon = response.results[0].geometry.lng;
+})}
+
+// 51.5073219, -0.1276474
+
+function reverseGeo (lat, lon) {
+  fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
+  .then((response) =>{
+    return response.json()})
+  .then( response => {
+    console.log(response);
+  })
+}

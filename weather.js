@@ -1,24 +1,8 @@
 
 
-// Variables List
 
-const city = document.querySelector('.output-location__city');
-const searchInput = document.querySelector('.input__search-box');
-const marker = document.querySelector('.here i');
 
-let lat = '';
-let lng = '';
-let activeMenu = 'current';
 
-// Input functions
-
-function weatherQuery(e) {
-  if (e.keyCode == 13) {
-    getWeather(searchInput.value);
-  }
-}
-
-searchInput.addEventListener('keypress', weatherQuery);
 
 // marker.addEventListener('click', () => {
 //   console.log('market event');
@@ -33,23 +17,9 @@ searchInput.addEventListener('keypress', weatherQuery);
 //   console.log(pos)
 // }
 
-marker.addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(geoSuccess);
-});
 
-function geoSuccess(pos) {
-  lat = pos.coords.latitude;
-  lon = pos.coords.longitude;
-  if (activeMenu === 'current') {
-    fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
-      .then((location) => {
-        return location.json();
-      })
-      .then(resLoc);
-  } else {
-    getWeather('', lat, lon);
-  }
-}
+
+
 
 // function geoSuccess(pos) {
 //   const lat = pos.coords.latitude;

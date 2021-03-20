@@ -55,14 +55,14 @@ dateNow();
 
 //Cookie Check
 
-// if (document.cookie.split('; ').length > 1) {
-//   getResults(
-//     document.cookie
-//       .split('; ')
-//       .find((row) => row.startsWith('WON_place='))
-//       .split('=')[1]
-//   );
-// }
+if (document.cookie.split('WON_Place=').length > 1) {
+  getWeather(
+    document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('WON_Place='))
+      .split('=')[1]
+  );
+}
 
 // Burger Animation
 
@@ -99,13 +99,48 @@ function reverseGeo(lat, lon, callback) {
       if (!response.results[0].components.city) {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.town;
-        console.log(`${geoPlace}, ${geoCountry}`)
         callback( `${geoPlace}, ${geoCountry}`);
       } else {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.city;
-        console.log(`${geoPlace}, ${geoCountry}`)
         callback(`${geoPlace}, ${geoCountry}`);
       }
     });
+}
+
+
+// Weather Functiions
+
+function getWeather(location, lat, lon) {
+  if(!lat || !lon){
+    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+      .then((weather) => {
+        return weather.json();
+      })
+      .then(displayResult);
+  } else {
+    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+    .then((weather) => {
+      return weather.json();
+    })
+    .then(displayResult);  
+  }
+  }
+
+
+
+  // Outputs
+
+function displayResult(weather) {
+  document.querySelector(
+    '.output-location__city'
+  ).textContent = `${weather.name}, ${weather.sys.country}`;
+  const tempNow = Math.round(weather.main.temp);
+  const tempmaxNow = Math.round(+weather.main.temp_max);
+  const tempminNow = Math.round(+weather.main.temp_min);
+  document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`;
+  document.querySelector(
+    '.hi-lo'
+  ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
+  document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
 }

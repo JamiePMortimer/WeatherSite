@@ -1,9 +1,3 @@
-
-
-
-
-
-
 // marker.addEventListener('click', () => {
 //   console.log('market event');
 //   navigator.geolocation.getCurrentPosition(geoSuc,geoFail);
@@ -17,10 +11,6 @@
 //   console.log(pos)
 // }
 
-
-
-
-
 // function geoSuccess(pos) {
 //   const lat = pos.coords.latitude;
 //   const lon = pos.coords.longitude;
@@ -28,26 +18,14 @@
 // }
 // API Calls
 
-function getWeather(location, lat, lon) {
-  if (activeMenu === 'current') {
-    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
-      .then((weather) => {
-        return weather.json();
-      })
-      .then(displayResult);
-  } else {}
 
 
+  // fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
+  // .then((location) => {
+  //   return location.json();
+  // }).then(location => fetch())
 
-
-
-    // fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)    
-    // .then((location) => {
-    //   return location.json();
-    // }).then(location => fetch())
-
-
-    // )
+  // )
 
   //   fetch(
   //     `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
@@ -61,9 +39,8 @@ function getWeather(location, lat, lon) {
   function latLon(location) {
     lat = location.results[0].geometry.lat;
     lon = location.results[0].geometry.lng;
-
   }
-}
+
 
 // Dom Amends
 
@@ -112,21 +89,7 @@ function resLoc(location) {
   }
 }
 
-// Outputs
 
-function displayResult(weather) {
-  document.querySelector(
-    '.output-location__city'
-  ).textContent = `${weather.name}, ${weather.sys.country}`;
-  const tempNow = Math.round(weather.main.temp);
-  const tempmaxNow = Math.round(+weather.main.temp_max);
-  const tempminNow = Math.round(+weather.main.temp_min);
-  document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`;
-  document.querySelector(
-    '.hi-lo'
-  ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
-  document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
-}
 
 // SPARE GEOCODE CODE SNIPPETS
 

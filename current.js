@@ -11,7 +11,8 @@ searchInput.addEventListener('keypress', weatherQuery);
 marker.addEventListener('click', () => {
   navigator.geolocation.getCurrentPosition((success) => {
     reverseGeo(success.coords.latitude, success.coords.longitude, location =>{
-      console.log(location);
+      document.cookie = `WON_Place=${location}`;
+      getWeather(location);
     }) ;
   });
 });

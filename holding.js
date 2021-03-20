@@ -90,7 +90,7 @@ function forwardGeo(location) {
     });
 }
 
-function reverseGeo(lat, lon) {
+function reverseGeo(lat, lon, callback) {
   fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
     .then((response) => {
       return response.json();
@@ -99,13 +99,13 @@ function reverseGeo(lat, lon) {
       if (!response.results[0].components.city) {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.town;
-        console.log(`Twon: ${geoPlace}`)
-        return `${geoPlace}, ${geoCountry}`;
+        console.log(`${geoPlace}, ${geoCountry}`)
+        callback( `${geoPlace}, ${geoCountry}`);
       } else {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.city;
-        console.log(`City: ${geoPlace}`)
-        return `${geoPlace}, ${geoCountry}`;
+        console.log(`${geoPlace}, ${geoCountry}`)
+        callback(`${geoPlace}, ${geoCountry}`);
       }
     });
 }

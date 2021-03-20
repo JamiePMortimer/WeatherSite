@@ -9,16 +9,14 @@ function weatherQuery(e) {
 searchInput.addEventListener('keypress', weatherQuery);
 
 marker.addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(success =>{
-    console.log(success)
-    reverseGeo(success.coords.latitude, success.coords.longitude)
-  })
+  navigator.geolocation.getCurrentPosition((success) => {
+    reverseGeo(success.coords.latitude, success.coords.longitude, location =>{
+      console.log(location);
+    }) ;
+  });
 });
 
-
-
 ////JUNK CODE \\\\\\////JUNK CODE \\\\\\////JUNK CODE \\\\\\////JUNK CODE \\\\\\////JUNK CODE \\\\\\
-
 
 // function resLoc(location) {
 //   const ctry = location.results[0].components.country_code.toUpperCase();
@@ -32,8 +30,6 @@ marker.addEventListener('click', () => {
 //     document.cookie = `WON_country=${ctry}`;
 //   }
 // }
-
-
 
 function geoSuccess(pos) {
   lat = pos.coords.latitude;

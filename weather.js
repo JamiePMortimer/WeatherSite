@@ -1,116 +1,144 @@
-// marker.addEventListener('click', () => {
-//   console.log('market event');
-//   navigator.geolocation.getCurrentPosition(geoSuc,geoFail);
-// });
+// API Key List
 
-// function geoFail(error){
-//   console.log(error.message)
-// }
+const API = {
+  key: '3c6b6453b9930344c0199f22529f0a0e',
+  base: 'https://api.openweathermap.org/data/2.5/',
+};
 
-// function geoSuc(pos) {
-//   console.log(pos)
-// }
+const Open = {
+  key: '69adfaa55e574e9bb954810d342d6fe7',
+  base: 'https://api.opencagedata.com/geocode/v1/json?q=',
+};
 
-// function geoSuccess(pos) {
-//   const lat = pos.coords.latitude;
-//   const lon = pos.coords.longitude;
-//   console.log(`lat:${lat} & lon${lon}`);
-// }
-// API Calls
+// Variables List
+
+const city = document.querySelector('.output-location__city');
+const searchInput = document.querySelector('.input__search-box');
+const marker = document.querySelector('.here i');
+
+let lat = '';
+let lng = '';
+let activeMenu = 'current';
+
+// Date Functions
+
+let dateNow = function () {
+  let now = new Date();
+  let date = document.querySelector('.output-location__date');
+  date.innerText = datebuilder(now);
+};
+
+function datebuilder(d) {
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'thurs', 'Fri', 'Sat'];
+  let day = days[d.getDay()];
+  let date = d.getDate();
+  let month = months[d.getMonth()];
+  let year = d.getFullYear();
+  return `${day} ${date} ${month}, ${year} `;
+}
+
+dateNow();
+
+//Cookie Check
+
+if (document.cookie.split('WON_Place=').length > 1) {
+  getWeather(
+    document.cookie
+      .split('; ')
+      .find((row) => row.startsWith('WON_Place='))
+      .split('=')[1]
+  );
+}
+
+// Burger Animation
+
+const burger = document.querySelector('.navigation-burger');
+const menu = document.querySelector('.side-menu');
+const menuLinks = document.querySelectorAll('.menu-links li');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('toggle');
+  menu.classList.toggle('side-menu-active');
+  menuLinks.forEach((e) => {
+    e.classList.toggle('hide');
+  });
+});
+
+// GeoCoding Functions
+
+function forwardGeo(location) {
+  fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      lat = response.results[0].geometry.lat;
+      lon = response.results[0].geometry.lng;
+    });
+}
+
+function reverseGeo(lat, lon, callback) {
+  fetch(`${Open.base}${lat}+${lon}&key=${Open.key}&pretty=1&no_annotations=1`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (!response.results[0].components.city) {
+        let geoCountry = response.results[0].components.country_code.toUpperCase();
+        let geoPlace = response.results[0].components.town;
+        callback( `${geoPlace}, ${geoCountry}`);
+      } else {
+        let geoCountry = response.results[0].components.country_code.toUpperCase();
+        let geoPlace = response.results[0].components.city;
+        callback(`${geoPlace}, ${geoCountry}`);
+      }
+    });
+}
 
 
+// Weather Functions
 
-  // fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
-  // .then((location) => {
-  //   return location.json();
-  // }).then(location => fetch())
-
-  // )
-
-  //   fetch(
-  //     `${APIs.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=current,minutely,hourly,alerts&appid=${APIs.key}`
-  //   )
-  //     .then((weather) => {
-  //       return weather.json();
-  //     })
-  //     .then(dothisthing);
-  // }
-
-  function latLon(location) {
-    lat = location.results[0].geometry.lat;
-    lon = location.results[0].geometry.lng;
+function getWeather(location, lat, lon) {
+  if(!lat || !lon){
+    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+      .then((weather) => {
+        return weather.json();
+      })
+      .then(displayResult);
+  } else {
+    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+    .then((weather) => {
+      return weather.json();
+    })
+    .then(displayResult);  
+  }
   }
 
+  // Outputs
 
-// Dom Amends
-
-function dothisthing(weather) {
-  let weatherDeets = {
-    locationCity: '',
-    locationCountry: '',
-    temp: Math.round(
-      (Math.round(weather.daily[1].temp.min) +
-        Math.round(weather.daily[1].temp.max)) /
-        2
-    ),
-    weatherDesc: weather.daily[1].weather[0].main,
-    tempMin: Math.round(weather.daily[1].temp.min),
-    tempMax: Math.round(weather.daily[1].temp.max),
-    weatherDate: datebuilder(new Date(weather.daily[1].dt * 1000)),
-  };
-  document.querySelector('.output-location__city');
-  // .textContent = `${weather.name}, ${weather.sys.country}`;
-  const tempNow = weatherDeets.temp;
-  const tempmaxNow = weatherDeets.tempMax;
-  const tempminNow = weatherDeets.tempMin;
+function displayResult(weather) {
+  document.querySelector(
+    '.output-location__city'
+  ).textContent = `${weather.name}, ${weather.sys.country}`;
+  const tempNow = Math.round(weather.main.temp);
+  const tempmaxNow = Math.round(+weather.main.temp_max);
+  const tempminNow = Math.round(+weather.main.temp_min);
   document.querySelector('.temp').innerHTML = `${tempNow}<span>°C</span>`;
   document.querySelector(
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
-  document.querySelector(
-    '.weather'
-  ).textContent = `${weatherDeets.weatherDesc}`;
-  document.querySelector('.output-location__date').innerText =
-    weatherDeets.weatherDate;
+  document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
 }
-
-//To Refactor
-
-function resLoc(location) {
-  const ctry = location.results[0].components.country_code.toUpperCase();
-  if (!location.results[0].components.city) {
-    getWeather(`${location.results[0].components.town}, ${ctry}`);
-    document.cookie = `WON_place=${location.results[0].components.town}`;
-    document.cookie = `WON_country=${ctry}`;
-  } else {
-    getWeather(`${location.results[0].components.city}, ${ctry}`);
-    document.cookie = `WON_place=${location.results[0].components.city}`;
-    document.cookie = `WON_country=${ctry}`;
-  }
-}
-
-
-
-// SPARE GEOCODE CODE SNIPPETS
-
-// const API2 = {
-//   key: '69adfaa55e574e9bb954810d342d6fe7',
-//   base: 'https://api.opencagedata.com/geocode/v1/json?q=',
-// };
-// let lat;
-// let lng;
-
-// function findCoords(location) {
-//   fetch(`${API2.base}${location}&key=${API2.key}&no_annotations=1`)
-//     .then((location) => {
-//       return location.json();
-//     })
-//     .then(displayResult);
-// }
-
-// function displayResult(location) {
-//   lat = location.results[0].geometry.lat;
-//   lng = location.results[0].geometry.lng;
-// }
-
-// END OF GEOCODE CODE SNIPPETS

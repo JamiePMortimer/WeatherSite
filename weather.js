@@ -119,7 +119,7 @@ function getWeather(location, lat, lon) {
       })
       .then(displayResult);
   } else {
-    fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+    fetch(`${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType.tomorrow}&units=metric&appid=${API.key}`)
     .then((weather) => {
       return weather.json();
     })
@@ -141,4 +141,9 @@ function displayResult(weather) {
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
+}
+
+const weatherType = {
+  all: 'current,minutely,hourly,daily,alerts',
+  tomorrow: 'current,minutely,hourly,alerts'
 }

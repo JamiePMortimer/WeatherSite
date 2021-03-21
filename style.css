@@ -15,7 +15,7 @@
   width: 20%;
   transform: translateX(100%);
   transition: transform 0.5s ease-in-out;
-  z-index: -1;
+  z-index: 3;
 }
 
 .side-menu-active {
@@ -101,7 +101,6 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 100%;
-  padding: 1.5rem, 1.5rem, 3rem;
   align-items: center;
   text-align: center;
 }

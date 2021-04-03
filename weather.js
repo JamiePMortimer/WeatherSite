@@ -133,7 +133,7 @@ function getWeather(location, lat, lon) {
       .then((weather) => {
         return weather.json();
       })
-      .then(displayResult);
+      .then(hourResult);
   }
 }
 
@@ -151,4 +151,11 @@ function displayResult(weather) {
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
+}
+
+function hourResult(weather) {
+  console.log(weather)
+  for (let i = 0; i < 24; i++) {
+    hourlys[i].innerText = (new Date(weather.hourly[i].dt * 1000)).getHours() +':00';
+  }
 }

@@ -5,6 +5,8 @@ const API = {
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
+const URLIcon = 'http://openweathermap.org/img/wn/'
+
 const Open = {
   key: '69adfaa55e574e9bb954810d342d6fe7',
   base: 'https://api.opencagedata.com/geocode/v1/json?q=',
@@ -155,7 +157,12 @@ function displayResult(weather) {
 
 function hourResult(weather) {
   console.log(weather)
+  hourContainer.classList.remove('hide');
   for (let i = 0; i < 24; i++) {
+    const weatherDiv = document.createElement('div');
     hourlys[i].innerText = (new Date(weather.hourly[i].dt * 1000)).getHours() +':00';
+    hourlys[i].append(weatherDiv);
+    hourlys[i].firstElementChild.classList.add('tomDiv');
+    hourlys[i].firstElementChild.innerHTML = `<img src="${URLIcon}${weather.hourly[i].weather[0].icon}.png"></img>`;
   }
 }

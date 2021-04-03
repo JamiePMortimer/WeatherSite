@@ -1,4 +1,5 @@
 const hourlys = document.querySelectorAll('.hour');
+const hourContainer = document.querySelector('.hourly-container')
 hourlys.forEach((hour) => {
   hour.addEventListener('pointerenter', (event) => {
     hour.classList.add('poop');
@@ -24,6 +25,7 @@ function weatherQuery(e) {
 searchInput.addEventListener('keypress', weatherQuery);
 
 function thisfunction() {
+
   hourlys.forEach((hour) => {
     hour.classList.add('hide');
   });

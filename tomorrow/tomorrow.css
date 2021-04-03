@@ -41,5 +41,11 @@ background-color: hsla(0, 0%, 100%, 0.5);
   display: flex;
 }
 
-
+.tomDiv{
+  align-self: flex-start;
+  /* position: absolute; */
+  width: 100%;
+  height: 2vh;
+  top:0;
+}
 

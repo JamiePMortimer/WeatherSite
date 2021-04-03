@@ -20,6 +20,14 @@ let lat = '';
 let lng = '';
 let activeMenu = 'current';
 
+// Weather Objects
+
+const weatherType = {
+  all: 'current,minutely,hourly,daily,alerts',
+  tomorrow: 'current,minutely,daily,alerts',
+  week: 'current,minutely,hourly,alerts',
+};
+
 // Date Functions
 
 let dateNow = function () {
@@ -79,7 +87,7 @@ burger.addEventListener('click', () => {
 
 // GeoCoding Functions
 
-function forwardGeo(location) {
+function forwardGeo(location, callback) {
   fetch(`${Open.base}${location}&key=${Open.key}&no_annotations=1`)
     .then((response) => {
       return response.json();
@@ -87,6 +95,7 @@ function forwardGeo(location) {
     .then((response) => {
       lat = response.results[0].geometry.lat;
       lon = response.results[0].geometry.lng;
+      callback({ lat: lat, lon: lon });
     });
 }
 
@@ -99,7 +108,7 @@ function reverseGeo(lat, lon, callback) {
       if (!response.results[0].components.city) {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.town;
-        callback( `${geoPlace}, ${geoCountry}`);
+        callback(`${geoPlace}, ${geoCountry}`);
       } else {
         let geoCountry = response.results[0].components.country_code.toUpperCase();
         let geoPlace = response.results[0].components.city;
@@ -108,26 +117,27 @@ function reverseGeo(lat, lon, callback) {
     });
 }
 
-
 // Weather Functions
 
 function getWeather(location, lat, lon) {
-  if(!lat || !lon){
+  if (!lat || !lon) {
     fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
       .then((weather) => {
         return weather.json();
       })
       .then(displayResult);
   } else {
-    fetch(`${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType.tomorrow}&units=metric&appid=${API.key}`)
-    .then((weather) => {
-      return weather.json();
-    })
-    .then(displayResult);  
+    fetch(
+      `${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType.tomorrow}&units=metric&appid=${API.key}`
+    )
+      .then((weather) => {
+        return weather.json();
+      })
+      .then(displayResult);
   }
-  }
+}
 
-  // Outputs
+// Outputs
 
 function displayResult(weather) {
   document.querySelector(
@@ -141,9 +151,4 @@ function displayResult(weather) {
     '.hi-lo'
   ).textContent = `${tempminNow}°C / ${tempmaxNow}°C`;
   document.querySelector('.weather').textContent = `${weather.weather[0].main}`;
-}
-
-const weatherType = {
-  all: 'current,minutely,hourly,daily,alerts',
-  tomorrow: 'current,minutely,hourly,alerts'
 }

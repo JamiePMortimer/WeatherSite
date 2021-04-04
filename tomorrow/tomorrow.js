@@ -16,9 +16,11 @@ const hourContainer = document.querySelector('.hourly-container')
 function weatherQuery(e) {
   if (e.keyCode == 13) {
     forwardGeo(searchInput.value, coords => {
+      document.querySelector(
+        '.output-location__city'
+      ).textContent = coords.location;
       getWeather('', coords.lat, coords.lon);
     });
-    console.log(searchInput.value);
     searchInput.value = '';
   }
 }

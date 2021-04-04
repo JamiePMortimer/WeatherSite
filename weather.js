@@ -97,7 +97,11 @@ function forwardGeo(location, callback) {
     .then((response) => {
       lat = response.results[0].geometry.lat;
       lon = response.results[0].geometry.lng;
-      callback({ lat: lat, lon: lon });
+      country = (response.results[0].components.country_code).toUpperCase()
+      location = (response.results[0].components.city) ? 
+      `${response.results[0].components.city}, ${country} ` :
+      `${response.results[0].components.town}, ${country} ` 
+      callback({ lat: lat, lon: lon, location: location });
     });
 }
 
@@ -135,7 +139,8 @@ function getWeather(location, lat, lon) {
       .then((weather) => {
         return weather.json();
       })
-      .then(hourResult);
+      .then(hourResult)
+      .then();
   }
 }
 

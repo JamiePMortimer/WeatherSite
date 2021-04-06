@@ -140,7 +140,6 @@ function getWeather(location, lat, lon) {
         return weather.json();
       })
       .then(hourResult)
-      .then();
   }
 }
 

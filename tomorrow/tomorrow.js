@@ -24,9 +24,14 @@ function weatherQuery(e) {
 }
 searchInput.addEventListener('keypress', weatherQuery);
 
-function thisfunction() {
-
-  hourlys.forEach((hour) => {
-    hour.classList.add('hide');
+marker.addEventListener('click', () => {
+  navigator.geolocation.getCurrentPosition((success) => {
+    reverseGeo(success.coords.latitude, success.coords.longitude, location =>{
+      document.cookie = `WON_Place=${location}`;
+      document.querySelector(
+        '.output-location__city'
+      ).textContent = location;
+      getWeather('',success.coords.latitude, success.coords.longitude);
+    }) ;
   });
-}
+});

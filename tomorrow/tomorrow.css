@@ -35,7 +35,7 @@
 .hour:hover {
   width: 96vw;
   align-items: flex-start;
-  background-color: hsl(239, 100%, 71%);
+  background-color: hsl(239, 100%, 62%);
 }
 
 .hide {

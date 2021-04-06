@@ -1,17 +1,15 @@
 const hourlys = document.querySelectorAll('.hour');
 const hourContainer = document.querySelector('.hourly-container')
-// hourlys.forEach((hour) => {
-//   hour.addEventListener('pointerenter', (event) => {
-//     hour.classList.add('poop');
-//     // thisfunction();
-//     console.log(event);
-//   });
-// });
-// hourlys.forEach((hour) => {
-//   hour.addEventListener('pointerleave', () => {
-//     hour.classList.remove('poop');
-//   });
-// });
+hourlys.forEach((hour) => {
+  hour.addEventListener('pointerenter', () => {
+    hour.firstElementChild.lastElementChild.classList.remove('hide')
+  });
+});
+hourlys.forEach((hour) => {
+  hour.addEventListener('pointerleave', () => {
+    hour.firstElementChild.lastElementChild.classList.add('hide')
+  });
+});
 
 function weatherQuery(e) {
   if (e.keyCode == 13) {

@@ -28,6 +28,10 @@
   border: 1px solid white;
 }
 
+.hour p{
+  padding-left: 1rem;
+}
+
 .hour:hover {
   width: 96vw;
   align-items: flex-start;

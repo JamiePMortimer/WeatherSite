@@ -112,3 +112,7 @@ video {
   cursor: default !important;
   
 }
+
+.weather-desc{
+  text-transform: capitalize;
+}

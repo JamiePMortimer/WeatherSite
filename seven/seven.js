@@ -1,4 +1,4 @@
-const days = document.querySelectorAll('.day');
+const day = document.querySelectorAll('.day');
 const dayContainer = document.querySelector('.day-container');
 
 function weatherQuery(e) {
@@ -6,7 +6,7 @@ function weatherQuery(e) {
     forwardGeo(searchInput.value, (coords) => {
       document.querySelector('.output-location__city').textContent =
         coords.location;
-      getWeather('', coords.lat, coords.lon);
+      getWeather(weatherPage, '', coords.lat, coords.lon);
     });
     searchInput.value = '';
   }
@@ -16,24 +16,27 @@ searchInput.addEventListener('keypress', weatherQuery);
 // Weather Outputs
 
 function weatherResult(weather) {
+  console.log(weather)
   dayContainer.classList.remove('hide');
   for (let i = 0; i < 7; i++) {
-    let rainVol = weather.hourly[i].rain
-      ? weather.hourly[i].rain['1h'].toFixed(1)
+    let rainVol = weather.daily[i].rain
+      ? weather.daily[i].rain.toFixed(1)
       : 0;
-    let snowVol = weather.hourly[i].snow ? weather.hourly[i].snow['1h'] : 0;
+    let snowVol = weather.daily[i].snow ? weather.daily[i].snow : 0;
     const weatherDiv = document.createElement('div');
-    days[i].innerText = new Date(weather.hourly[i].dt * 1000).getDay();
-    days[i].append(weatherDiv);
-    days[i].firstElementChild.classList.add('tomDiv');
-    days[i].firstElementChild.innerHTML = `<img src="${URLIcon}${
-      weather.hourly[i].weather[0].icon
+    day[i].innerText = days[new Date(weather.daily[i].dt * 1000).getDay()];
+    day[i].append(weatherDiv);
+    day[i].firstElementChild.classList.add('tomDiv');
+    day[i].firstElementChild.innerHTML = `<img src="${URLIcon}${
+      weather.daily[i].weather[0].icon
     }.png"></img>
     <div class="hide">
     <p class="weather-desc">Weather: ${
-      weather.hourly[i].weather[0].description
+      weather.daily[i].weather[0].description
     }</p>
-    <p>Temp: ${weather.hourly[i].temp.toFixed(0)}°C  </p>
+    
+    <p>Min Temp: ${weather.daily[i].temp.min.toFixed(0)}°C  </p>
+    <p>Max Temp: ${weather.daily[i].temp.max.toFixed(0)}°C  </p>
     <p class="rain">Rain: ${rainVol}mm</p>
     <p class="snow">Snow: ${snowVol}mm</p>
     </div>

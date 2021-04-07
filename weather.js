@@ -17,6 +17,8 @@ const Open = {
 const city = document.querySelector('.output-location__city');
 const searchInput = document.querySelector('.input__search-box');
 const marker = document.querySelector('.here i');
+const days = ['Sun', 'Mon', 'Tues', 'Wed', 'thurs', 'Fri', 'Sat'];
+const weatherPage = document.querySelector('.current-link').id;
 
 let lat = '';
 let lng = '';
@@ -27,7 +29,7 @@ let activeMenu = 'current';
 const weatherType = {
   all: 'current,minutely,hourly,daily,alerts',
   tomorrow: 'current,minutely,daily,alerts',
-  week: 'current,minutely,hourly,alerts',
+  seven: 'current,minutely,hourly,alerts',
 };
 
 // Date Functions
@@ -53,7 +55,6 @@ function datebuilder(d) {
     'Nov',
     'Dec',
   ];
-  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'thurs', 'Fri', 'Sat'];
   let day = days[d.getDay()];
   let date = d.getDate();
   let month = months[d.getMonth()];
@@ -66,7 +67,7 @@ dateNow();
 //Cookie Check
 
 if (document.cookie.split('WON_Place=').length > 1) {
-  getWeather(
+  getWeather(weatherPage,
     document.cookie
       .split('; ')
       .find((row) => row.startsWith('WON_Place='))
@@ -125,8 +126,26 @@ function reverseGeo(lat, lon, callback) {
 
 // Weather Functions
 
-function getWeather(location, lat, lon) {
-  if (!lat || !lon) {
+// function getWeather(location, lat, lon) {
+//   if (!lat || !lon) {
+//     fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
+//       .then((weather) => {
+//         return weather.json();
+//       })
+//       .then(displayResult);
+//   } else {
+//     fetch(
+//       `${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType.tomorrow}&units=metric&appid=${API.key}`
+//     )
+//       .then((weather) => {
+//         return weather.json();
+//       })
+//       .then(weatherResult);
+//   }
+// }
+
+function getWeather(type, location, lat, lon) {
+  if (type === 'current') {
     fetch(`${API.base}weather?q=${location}&units=metric&appid=${API.key}`)
       .then((weather) => {
         return weather.json();
@@ -134,12 +153,12 @@ function getWeather(location, lat, lon) {
       .then(displayResult);
   } else {
     fetch(
-      `${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType.tomorrow}&units=metric&appid=${API.key}`
+      `${API.base}/onecall?lat=${lat}&lon=${lon}&exclude=${weatherType[type]}&units=metric&appid=${API.key}`
     )
       .then((weather) => {
         return weather.json();
       })
-      .then(weatherResult)
+      .then(weatherResult);
   }
 }
 

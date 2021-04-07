@@ -35,3 +35,30 @@ marker.addEventListener('click', () => {
     }) ;
   });
 });
+
+// Output Render
+
+function weatherResult(weather) {
+  hourContainer.classList.remove('hide');
+  for (let i = 0; i < 24; i++) {
+    let rainVol = weather.hourly[i].rain ? (weather.hourly[i].rain['1h']).toFixed(1) : 0;
+    let snowVol = weather.hourly[i].snow ? weather.hourly[i].snow['1h'] : 0;
+    const weatherDiv = document.createElement('div');
+    hourlys[i].innerText =
+      new Date(weather.hourly[i].dt * 1000).getHours() + ':00';
+    hourlys[i].append(weatherDiv);
+    hourlys[i].firstElementChild.classList.add('tomDiv');
+    hourlys[i].firstElementChild.innerHTML = `<img src="${URLIcon}${
+      weather.hourly[i].weather[0].icon
+    }.png"></img>
+    <div class="hide">
+    <p class="weather-desc">Weather: ${
+      weather.hourly[i].weather[0].description
+    }</p>
+    <p>Temp: ${weather.hourly[i].temp.toFixed(0)}°C  </p>
+    <p class="rain">Rain: ${rainVol}mm</p>
+    <p class="snow">Snow: ${snowVol}mm</p>
+    </div>
+    `;
+  }
+}

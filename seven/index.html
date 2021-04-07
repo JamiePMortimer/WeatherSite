@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="../shared.css" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="./tomorrow.css" />
+    <link rel="stylesheet" href="./seven.css" />
   </head>
   <body>
     <nav class="navigation">
@@ -39,10 +39,10 @@
     <menu class="side-menu">
       <ul class="menu-links">
         <li class="hide" id="current"><a href="../index.html">Current</a></li>
-        <li class="hide current-link" id="tommorrow">Next 24 Hrs</li>
-        <li class="hide" id="seven">
-          <a href="../seven/index.html">Next 7 Days</a>
+        <li class="hide" id="tommorrow">
+          <a href="../tomorrow/index.html">Next 24 Hrs</a>
         </li>
+        <li class="hide current-link" id="seven">Next 7 Days</li>
       </ul>
     </menu>
     <main>
@@ -59,40 +59,18 @@
         <div class="output-location__city">Sheffield, GB</div>
         <div class="output-location__date"></div>
       </section>
-      <div class="current-weather">
-        <div class="temp">15<span>°C</span></div>
-        <div class="weather">Sunny</div>
-        <div class="hi-lo">15°C / 20°C</div>
-      </div>
-      <div class="hourly-container hide">
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
-        <div class="hour"></div>
+      <div class="day-container hide">
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
       </div>
     </main>
     <script src="../weather.js"></script>
-    <script src="./tomorrow.js"></script>
+    <script src="./seven.js"></script>
     <script
       src="https://kit.fontawesome.com/f331affee2.js"
       crossorigin="anonymous"

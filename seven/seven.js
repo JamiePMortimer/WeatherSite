@@ -1,6 +1,18 @@
 const day = document.querySelectorAll('.day');
 const dayContainer = document.querySelector('.day-container');
 
+day.forEach((d) => {
+  d.addEventListener('pointerenter', () => {
+    d.firstElementChild.lastElementChild.classList.remove('hide')
+  });
+});
+day.forEach((d) => {
+  d.addEventListener('pointerleave', () => {
+    d.firstElementChild.lastElementChild.classList.add('hide')
+  });
+});
+
+
 function weatherQuery(e) {
   if (e.keyCode == 13) {
     forwardGeo(searchInput.value, (coords) => {
@@ -44,16 +56,7 @@ function weatherResult(weather) {
   }
 }
 
-// hourlys.forEach((hour) => {
-//   hour.addEventListener('pointerenter', () => {
-//     hour.firstElementChild.lastElementChild.classList.remove('hide')
-//   });
-// });
-// hourlys.forEach((hour) => {
-//   hour.addEventListener('pointerleave', () => {
-//     hour.firstElementChild.lastElementChild.classList.add('hide')
-//   });
-// });
+
 
 // marker.addEventListener('click', () => {
 //   navigator.geolocation.getCurrentPosition((success) => {

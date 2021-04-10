@@ -17,7 +17,7 @@ function weatherQuery(e) {
       document.querySelector(
         '.output-location__city'
       ).textContent = coords.location;
-      getWeather('', coords.lat, coords.lon);
+      getWeather(weatherPage,'', coords.lat, coords.lon);
     });
     searchInput.value = '';
   }
@@ -31,7 +31,7 @@ marker.addEventListener('click', () => {
       document.querySelector(
         '.output-location__city'
       ).textContent = location;
-      getWeather('',success.coords.latitude, success.coords.longitude);
+      getWeather(weatherPage,'',success.coords.latitude, success.coords.longitude);
     }) ;
   });
 });
@@ -39,6 +39,7 @@ marker.addEventListener('click', () => {
 // Output Render
 
 function weatherResult(weather) {
+  console.log(weatherPage)
   hourContainer.classList.remove('hide');
   for (let i = 0; i < 24; i++) {
     let rainVol = weather.hourly[i].rain ? (weather.hourly[i].rain['1h']).toFixed(1) : 0;

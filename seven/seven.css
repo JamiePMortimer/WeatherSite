@@ -12,13 +12,13 @@
   overflow: scroll;
 }
 
-.hour {
+.day {
   position: relative;
   border-radius: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4vw;
+  width: 14vw;
   margin-bottom: 2px;
   height: 100%;
   background-color: hsla(239, 100%, 71%, 0.5);
@@ -30,7 +30,8 @@
 }
 
 .day:hover {
-  width: 96vw;
+  width: 50vw;
+  color: white;
   align-items: flex-start;
   background-color: hsl(239, 100%, 62%);
 }
@@ -46,21 +47,4 @@
 .hide {
   display: none;
 }
-/* 
 
-
-.current-weather {
-  display: none;
-}
-
-
-
-
-
-
-
-
-
-
-
- */

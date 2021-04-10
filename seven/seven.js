@@ -25,10 +25,22 @@ function weatherQuery(e) {
 }
 searchInput.addEventListener('keypress', weatherQuery);
 
+marker.addEventListener('click', () => {
+  navigator.geolocation.getCurrentPosition((success) => {
+    reverseGeo(success.coords.latitude, success.coords.longitude, location =>{
+      document.cookie = `WON_Place=${location}`;
+      document.querySelector(
+        '.output-location__city'
+      ).textContent = location;
+      getWeather(weatherPage,'',success.coords.latitude, success.coords.longitude);
+    }) ;
+  });
+});
+
+
 // Weather Outputs
 
 function weatherResult(weather) {
-  console.log(weather)
   dayContainer.classList.remove('hide');
   for (let i = 0; i < 7; i++) {
     let rainVol = weather.daily[i].rain
